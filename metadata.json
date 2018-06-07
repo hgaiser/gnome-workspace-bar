@@ -11,6 +11,6 @@
     "3.8"
   ], 
   "url": "http://github.com/hgaiser/gnome-workspace-bar", 
-  "uuid": "gnome-workspace-bar", 
+  "uuid": "gnome-workspace-bar@github.com", 
   "version": 7
 }
