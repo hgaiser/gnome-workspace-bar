@@ -10,7 +10,7 @@
     "3.6", 
     "3.8"
   ], 
-  "url": "http://markbokil.com/downloads/extensions/", 
-  "uuid": "workspace-bar@markbokil.com", 
+  "url": "http://github.com/hgaiser/gnome-workspace-bar", 
+  "uuid": "gnome-workspace-bar", 
   "version": 7
 }
