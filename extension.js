@@ -15,7 +15,7 @@ const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
 const Gio = imports.gi.Gio;
 
-const Gettext = imports.gettext.domain('markbokil.com-extensions');
+const Gettext = imports.gettext.domain('gnome-workspace-bar-extensions');
 const _ = Gettext.gettext;
 const _N = function(x) { return x; }
 
@@ -25,7 +25,7 @@ const Convenience = Me.imports.convenience;
 const Keys = Me.imports.keys;
 
 const DEBUG = false;
-const PREFS_DIALOG = 'gnome-shell-extension-prefs workspace-bar@markbokil.com';
+const PREFS_DIALOG = 'gnome-shell-extension-prefs gnome-workspace-bar@github.com';
 
 const DCONF_PATH = 'org.gnome.desktop.wm.preferences';
 const DCONF_KEY_WSNAMES = 'workspace-names';
