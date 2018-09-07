@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="gnome-workspace-bar-extensions">
 	<schema path="/org/gnome/shell/extensions/workspacebar/" id="org.gnome.shell.extensions.workspacebar">
-		<key type="b" name="overview-mode-key">
-			<default>false</default>
-			<summary>Enable overview mode.</summary>
-			<description>Allows overview to be opened when you mouse over the workspace bar.</description>
-		</key>
 		<key type="s" name="panel-position-key">
 			<default>'center'</default>
 			<summary>Position on panel.</summary>

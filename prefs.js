@@ -13,7 +13,6 @@ const Keys = Me.imports.keys;
 
 const _N = function(x) { return x; }
 
-const SHOW_OVERVIEW = _N("Show Overview");
 const RADIO_BTNS = [
         "left",
         "center",
@@ -34,14 +33,6 @@ WorkspaceBarSettingsWidget.prototype = {
         this._grid = new Gtk.Grid();
         this._grid.margin = this._grid.row_spacing = this._grid.column_spacing = 10;
 	    this._settings = Convenience.getSettings();
-
-        //overview switch
-        this._grid.attach(new Gtk.Label({ label: _(SHOW_OVERVIEW), wrap: true, xalign: 0.0 }), 0,  0, 1, 1);
-        let overlaySwitch = new Gtk.Switch({active: this._settings.get_boolean(Keys.OVERVIEW_MODE)});
-        this._grid.attach(overlaySwitch, 4, 0, 1, 1);
-
-        overlaySwitch.connect('notify::active', Lang.bind(this, this._setOverViewMode));
-
 
         let introLabel = _("Panel Position");
         let radio = null;
@@ -73,12 +64,7 @@ WorkspaceBarSettingsWidget.prototype = {
         return str.charAt(0).toUpperCase() + str.slice(1);
     },
 
-    _setOverViewMode: function(object) {
-        this._settings.set_boolean(Keys.OVERVIEW_MODE, object.active);
-    },
-
     _resetSettings: function() {
-        this._settings.set_boolean(Keys.OVERVIEW_MODE, false);
     },
 
     _completePrefsWidget: function() {
