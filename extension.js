@@ -65,9 +65,9 @@ WorkspaceBar.prototype = {
 		box.insert_child_at_index(this.buttonBox,0);
 
 		this._screenSignals = [];
-		this._screenSignals.push(global.screen.connect_after('workspace-removed', Lang.bind(this,this._buildWorkSpaceBtns)));
-		this._screenSignals.push(global.screen.connect_after('workspace-added', Lang.bind(this,this._buildWorkSpaceBtns)));
-		this._screenSignals.push(global.screen.connect_after('workspace-switched', Lang.bind(this,this._buildWorkSpaceBtns)));
+		this._screenSignals.push(global.workspace_manager.connect_after('workspace-removed', Lang.bind(this,this._buildWorkSpaceBtns)));
+		this._screenSignals.push(global.workspace_manager.connect_after('workspace-added', Lang.bind(this,this._buildWorkSpaceBtns)));
+		this._screenSignals.push(global.workspace_manager.connect_after('workspace-switched', Lang.bind(this,this._buildWorkSpaceBtns)));
 
 		this._buildWorkSpaceBtns();
 	},
@@ -79,14 +79,14 @@ WorkspaceBar.prototype = {
 
 		// disconnect screen signals 
 		for (x=0; x < this._screenSignals.length; x++) {
-			global.screen.disconnect(this._screenSignals[x]);
+			global.workspace_manager.disconnect(this._screenSignals[x]);
 		}
 		this._screenSignals = [];
 		this._screenSignals = null;
 
 		// disconnect settings bindings 
 		for (x=0; x < this._settingsSignals.length; x++) {
-			global.screen.disconnect(this._settingsSignals[x]);
+			global.workspace_manager.disconnect(this._settingsSignals[x]);
 		}
 		this._settingsSignals = [];
 		this._settingsSignals = null;
@@ -112,7 +112,7 @@ WorkspaceBar.prototype = {
 	},
 
 	_getCurrentWorkSpace: function() {
-		return global.screen.get_active_workspace().index();
+		return global.workspace_manager.get_active_workspace().index();
 	},
 
 	_buildWorkSpaceBtns: function() {
@@ -120,10 +120,10 @@ WorkspaceBar.prototype = {
 		this.currentWorkSpace = this._getCurrentWorkSpace();
 		this.buttons = []; //truncate arrays to release memory
 		this.labels = [];
-		let workSpaces = global.screen.n_workspaces - 1;
+		let workSpaces = global.workspace_manager.n_workspaces - 1;
 
-		for (i = 0; i < global.screen.n_workspaces; ++i) {
-			let has_window = global.screen.get_workspace_by_index(i).list_windows().length > 0;
+		for (i = 0; i < global.workspace_manager.n_workspaces; ++i) {
+			let has_window = global.workspace_manager.get_workspace_by_index(i).list_windows().length > 0;
 			this.labels[i] = new St.Label({ text: _(this._names[i]), style_class: i == this.currentWorkSpace ? "active" : (has_window ? "hasWindow" : "inactive") });
 
 			this.buttons[i] = new St.Button(); //{style_class: "panel-button"}
@@ -161,7 +161,7 @@ WorkspaceBar.prototype = {
 		//index--; //button labels are 1,2,3, off by +1
 
 		try {
-			let possibleWorkspace = global.screen.get_workspace_by_index(index);
+			let possibleWorkspace = global.workspace_manager.get_workspace_by_index(index);
 			possibleWorkspace.activate(global.get_current_time());
 		} catch(e) {
 			global.logError(e);
@@ -173,7 +173,7 @@ WorkspaceBar.prototype = {
 
 	_activateScroll : function (offSet) {
 		this.currentWorkSpace = this._getCurrentWorkSpace() + offSet;
-		this.currentWorkspace = Math.min(this.currentWorkspace, global.screen.n_workspaces - 1);
+		this.currentWorkspace = Math.min(this.currentWorkspace, global.workspace_manager.n_workspaces - 1);
 		this.currentWorkspace = Math.max(this.currentWorkspace, 0);
 		this._setWorkSpace(this.currentWorkSpace);
 	},
